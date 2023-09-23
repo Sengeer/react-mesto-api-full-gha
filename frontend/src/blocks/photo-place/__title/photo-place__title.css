@@ -1,0 +1,12 @@
+.photo-place__title {
+  margin: 0;
+  max-width: 190px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-area: photo-place__title;
+}

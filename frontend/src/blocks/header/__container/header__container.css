@@ -1,0 +1,6 @@
+.header__container {
+  width: auto;
+  display: flex;
+  position: static;
+  flex-direction: row;
+}

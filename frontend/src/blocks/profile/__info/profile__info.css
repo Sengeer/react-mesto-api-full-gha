@@ -1,0 +1,22 @@
+.profile__info {
+  padding: 0 0 33px 0;
+  display: grid;
+  position: relative;
+  grid-template-columns: 100% 0px;
+  grid-template-rows: repeat(3, minmax(min-content, max-content));
+  grid-template-areas:
+    'profile__avatar profile__avatar'
+    'profile__name profile__edit-btn'
+    'profile__description profile__description';
+}
+
+@media (min-width: 899px) {
+  .profile__info {
+    padding: 0;
+    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: repeat(2, minmax(39px, max-content));
+    grid-template-areas:
+      'profile__avatar profile__name profile__edit-btn'
+      'profile__avatar profile__description .';
+  }
+}

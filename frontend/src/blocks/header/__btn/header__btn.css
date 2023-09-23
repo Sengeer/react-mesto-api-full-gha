@@ -1,0 +1,25 @@
+.header__btn {
+  all: unset;
+  margin: 0 30px 0 auto;
+  height: 22px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  align-self: center;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity ease-in-out 0.2s;
+}
+
+.header__btn:hover {
+  opacity: 0.6;
+}
+
+@media (min-width: 899px) {
+  .header__btn {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

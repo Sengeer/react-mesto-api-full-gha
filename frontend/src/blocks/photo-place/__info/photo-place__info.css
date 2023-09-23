@@ -1,0 +1,16 @@
+.photo-place__info {
+  padding: 0 21px;
+  width: 100%;
+  height: 79px;
+  background-color: #fff;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 0 0 10px 10px;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(2, max-content);
+  grid-template-rows: repeat(2, minmax(39px, max-content));
+  grid-template-areas:
+    'photo-place__title photo-place__like-btn'
+    'photo-place__title photo-place__like-counter';
+}

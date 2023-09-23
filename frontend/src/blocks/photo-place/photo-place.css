@@ -1,0 +1,12 @@
+.photo-place {
+  padding: 36px 0 0 0;
+  margin: 0 auto;
+  min-width: 282px;
+  max-width: 880px;
+}
+
+@media (min-width: 899px) {
+  .photo-place {
+    padding: 50px 0 0 0;
+  }
+}

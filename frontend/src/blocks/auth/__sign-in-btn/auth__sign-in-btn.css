@@ -1,0 +1,15 @@
+.auth__sign-in-btn {
+  all: unset;
+  height: 22px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity ease-in-out 0.2s;
+}
+
+.auth__sign-in-btn:hover {
+  opacity: 0.6;
+}
+

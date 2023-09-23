@@ -1,0 +1,13 @@
+.popup__image_modal-type_success {
+  margin: 25px 58px 40px 58px;
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 120px;
+  max-height: 120px;
+}
+
+@media (min-width: 600px) {
+  .popup__image_modal-type_success {
+    margin: 26px 119px 32px 119px;
+  }
+}

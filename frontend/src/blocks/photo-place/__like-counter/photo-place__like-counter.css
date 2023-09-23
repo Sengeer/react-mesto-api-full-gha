@@ -1,0 +1,13 @@
+.photo-place__like-counter {
+  margin: 6px 0 0 0;
+  max-width: 50px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  align-self: flex-start;
+  grid-area: photo-place__like-counter;
+}

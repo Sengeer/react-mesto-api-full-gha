@@ -1,0 +1,19 @@
+.auth__sign-in-text {
+  visibility: hidden;
+  opacity: 0;
+  margin: 20px 30px 0 30px;
+  text-align: center;
+  height: 17px;
+  width: calc(100% - 60px);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  color: #fff;
+}
+
+@media (min-width: 899px) {
+  .auth__sign-in-text {
+    width: 100%;
+    margin: 15px 0;
+  }
+}
