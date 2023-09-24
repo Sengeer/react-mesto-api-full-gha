@@ -40,24 +40,25 @@ class Auth {
     });
   }
 
-  authorization(authData) {
+  authorization(requestBody) {
     return this._request(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(authData)
+      body: JSON.stringify(requestBody)
     });
   }
 
-  identification(requestBody) {
+  identification(authData) {
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: Object.assign({}, this._headers, requestBody)
+      headers: Object.assign({}, this._headers, authData)
     });
   }
 }
 
 const auth = new Auth({
-  baseUrl: 'https://auth.nomoreparties.co',
+  // baseUrl: 'https://auth.nomoreparties.co',
+  baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json'
   }

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const {
   createUser,
@@ -21,6 +22,7 @@ const app = express();
 mongoose.connect(URL, {
   useNewUrlParser: true,
 });
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

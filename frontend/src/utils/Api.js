@@ -22,13 +22,13 @@ class Api {
     });
   }
 
-  getInitialCards() {
+  getInitialCards(authData) {
     return this._request(`${this._baseUrl}/cards`, {
-      headers: this._headers
+      headers: Object.assign({}, this._headers, authData)
     });
   }
 
-  patchUserInfo(userDataValue) {
+  patchUserInfo(userDataValue, authData) {
     const {
       name = '',
       description = '',
@@ -37,7 +37,7 @@ class Api {
     if (name && description) {
       return this._request(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: this._headers,
+        headers: Object.assign({}, this._headers, authData),
         body: JSON.stringify({
           name: name,
           about: description
@@ -46,7 +46,7 @@ class Api {
     } else if (avatarLink) {
       return this._request(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
-        headers: this._headers,
+        headers: Object.assign({}, this._headers, authData),
         body: JSON.stringify({
           avatar: avatarLink
         })
@@ -54,40 +54,42 @@ class Api {
     };
   }
 
-  addNewCard(cardDataValue) {
+  addNewCard(cardDataValue, authData) {
     return this._request(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: Object.assign({}, this._headers, authData),
       body: JSON.stringify(cardDataValue)
     });
   }
 
-  deleteCard(cardId) {
+  deleteCard(cardId, authData) {
     return this._request(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: Object.assign({}, this._headers, authData),
     });
   }
 
-  changeLikeCardStatus(cardId, isLiked) {
+  changeLikeCardStatus(cardId, isLiked, authData) {
     if (isLiked) {
       return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
-        headers: this._headers
+        headers: Object.assign({}, this._headers, authData)
       });
     } else {
       return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
-        headers: this._headers
+        headers: Object.assign({}, this._headers, authData)
       });
     };
   }
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-69',
+  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-69',
+  baseUrl: 'http://localhost:3000',
+  // baseUrl: 'http://mesto.sengeer.nomoredomainsrocks.ru',
   headers: {
-    authorization: '8eb2c5a1-7216-4743-9490-cbf6391354bb',
+    // authorization: '8eb2c5a1-7216-4743-9490-cbf6391354bb',
     'Content-Type': 'application/json'
   }
 });

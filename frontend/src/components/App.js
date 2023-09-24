@@ -34,11 +34,15 @@ function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [userData, setUserData] = useState({
     email: '',
-    id: '',
     token: auth.getToken()
   });
+  let authorizationHeader = { 'Authorization': `Bearer ${userData.token}` };
 
   const navigate = useNavigate();
+
+  const refreshPage = () => {
+    navigate(0);
+  }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -65,6 +69,7 @@ function App() {
   }
 
   function handleExitClick() {
+    refreshPage();
     setLoggedIn(false);
     auth.removeToken();
     navigate('/sign-in', { replace: true });
@@ -85,9 +90,9 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(item => item._id === currentUser._id);
+    const isLiked = card.likes.some(item => item === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, !isLiked)
+    api.changeLikeCardStatus(card._id, !isLiked, authorizationHeader)
       .then(newCard => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -104,7 +109,7 @@ function App() {
     api.patchUserInfo({
       name: userDataValue.name,
       description: userDataValue.about
-    })
+    }, authorizationHeader)
       .then(resMyUserData => {
         setCurrentUser(resMyUserData);
         closeAllPopups();
@@ -118,7 +123,7 @@ function App() {
 
     api.patchUserInfo({
       avatarLink: avatarDataValue.link
-    })
+    }, authorizationHeader)
       .then(resMyUserData => {
         setCurrentUser(resMyUserData);
         closeAllPopups();
@@ -133,7 +138,7 @@ function App() {
     api.addNewCard({
       name: cardDataValue.name,
       link: cardDataValue.link
-    })
+    }, authorizationHeader)
       .then((resCard) => {
         setCards([resCard, ...cards]);
         closeAllPopups();
@@ -143,7 +148,7 @@ function App() {
   }
 
   function handleConfirmSubmit() {
-    api.deleteCard(deleteCardId)
+    api.deleteCard(deleteCardId, authorizationHeader)
       .then(() => {
         setCards(cards.filter((i) => i._id !== deleteCardId));
         closeAllPopups();
@@ -176,6 +181,7 @@ function App() {
           setLoggedIn(true);
           auth.setToken(res.token);
           navigate('/', { replace: true });
+          refreshPage();
         } else {
           setIsTooltipPopupOpen(true);
           setIsTooltipPopupSuccess(false);
@@ -186,15 +192,23 @@ function App() {
 
   function userCheck() {
     if (userData.token) {
-      const requestBody = { 'Authorization': `Bearer ${userData.token}` };
-      auth.identification(requestBody)
-        .then(res => {
-          if ((res.statusCode !== 400) && (res.statusCode !== 401)) {
+      Promise.all([
+        auth.identification(authorizationHeader),
+        api.getInitialCards(authorizationHeader)
+      ])
+        .then(([resInfoUser, resCardsData]) => {
+          if ((resInfoUser.statusCode !== 400) && (resInfoUser.statusCode !== 401)) {
+            setCurrentUser({
+              name: resInfoUser.name,
+              about: resInfoUser.about,
+              avatar: resInfoUser.avatar,
+              _id: resInfoUser._id
+            });
             setUserData({
-              email: res.data.email,
-              id: res.data._id,
+              email: resInfoUser.email,
               token: auth.getToken()
             });
+            setCards(resCardsData.reverse());
             setLoggedIn(true);
             navigate('/', { replace: true });
           } else {
@@ -232,20 +246,11 @@ function App() {
 
   useEffect(() => {
     userCheck();
-    Promise.all([
-      api.getUserInfo(),
-      api.getInitialCards()
-    ])
-      .then(([resInfoUser, resCardsData]) => {
-        setCurrentUser(resInfoUser);
-        setCards(resCardsData);
-      })
-      .catch(console.error);
   }, [])
 
-  if (currentUser.name === '') {
-    return
-  }
+    if ((currentUser.name === '') && ((loggedIn === undefined) || loggedIn)) {
+      return
+    }
 
   return (
     <Routes>

@@ -19,7 +19,6 @@ function Header({
     }
   }
 
-
   return (
     <header
       className={
