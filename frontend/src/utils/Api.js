@@ -16,12 +16,6 @@ class Api {
     }
   }
 
-  getUserInfo() {
-    return this._request(`${this._baseUrl}/users/me`, {
-      headers: this._headers
-    });
-  }
-
   getInitialCards(authData) {
     return this._request(`${this._baseUrl}/cards`, {
       headers: Object.assign({}, this._headers, authData)
