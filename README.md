@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес <ipv4>
+IP 158.160.99.12
 
 Frontend https://mesto.sengeer.nomoredomainsrocks.ru
 
