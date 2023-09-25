@@ -12,6 +12,7 @@ const {
   requestLogger,
   errorLogger,
 } = require('./middlewares/logger');
+require('dotenv').config();
 
 const {
   PORT = 3001,
