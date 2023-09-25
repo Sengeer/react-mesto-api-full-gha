@@ -6,7 +6,7 @@ const NotFoundError = require('../errors/not-found-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
 
-const { KEY = 'uXDm8ygPYPzEJ3qbycmZ' } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const handleUserDataUpdate = (req, res, next) => {
   const { name, about, avatar } = req.body;
@@ -115,7 +115,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        KEY,
+        NODE_ENV === 'production' ? JWT_SECRET : 'uXDm8ygPYPzEJ3qbycmZ',
         { expiresIn: '7d' },
       );
       res

@@ -57,8 +57,6 @@ class Auth {
 }
 
 const auth = new Auth({
-  // baseUrl: 'https://auth.nomoreparties.co',
-  // baseUrl: 'http://localhost:3000',
   baseUrl: 'https://api.mesto.sengeer.nomoredomainsrocks.ru',
   headers: {
     'Content-Type': 'application/json'
