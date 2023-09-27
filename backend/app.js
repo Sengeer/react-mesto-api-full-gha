@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
@@ -23,10 +24,20 @@ const app = express();
 mongoose.connect(URL, {
   useNewUrlParser: true,
 });
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://mesto.sengeer.nomoredomainsrocks.ru',
+    'https://mesto.sengeer.nomoredomainsrocks.ru',
+  ],
+  credentials: true,
+  maxAge: 30,
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(requestLogger);
 
 app.get('/crash-test', () => {

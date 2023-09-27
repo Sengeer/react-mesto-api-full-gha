@@ -4,20 +4,20 @@ class Auth {
     this._headers = options.headers;
   }
 
-  removeToken() {
-    localStorage.removeItem('token');
+  removeAuthCheck() {
+    localStorage.removeItem('authorized');
   }
 
-  getToken() {
+  getAuthCheck() {
     try {
-      return localStorage.getItem('token');
+      return localStorage.getItem('authorized');
     } catch {
       return '';
     }
   }
 
-  setToken(tokenData) {
-    localStorage.setItem('token', tokenData);
+  setAuthCheck(isAuth) {
+    localStorage.setItem('authorized', isAuth);
   }
 
   _request(url, options) {
@@ -44,14 +44,16 @@ class Auth {
     return this._request(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
+      credentials: "include"
     });
   }
 
-  identification(authData) {
+  identification() {
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: Object.assign({}, this._headers, authData)
+      headers: Object.assign({}, this._headers),
+      credentials: "include"
     });
   }
 }

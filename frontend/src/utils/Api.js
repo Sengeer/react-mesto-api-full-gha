@@ -16,13 +16,14 @@ class Api {
     }
   }
 
-  getInitialCards(authData) {
+  getInitialCards() {
     return this._request(`${this._baseUrl}/cards`, {
-      headers: Object.assign({}, this._headers, authData)
+      headers: Object.assign({}, this._headers),
+      credentials: 'include'
     });
   }
 
-  patchUserInfo(userDataValue, authData) {
+  patchUserInfo(userDataValue) {
     const {
       name = '',
       description = '',
@@ -31,48 +32,54 @@ class Api {
     if (name && description) {
       return this._request(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: Object.assign({}, this._headers, authData),
+        headers: Object.assign({}, this._headers),
         body: JSON.stringify({
           name: name,
           about: description
-        })
+        }),
+        credentials: 'include'
       });
     } else if (avatarLink) {
       return this._request(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
-        headers: Object.assign({}, this._headers, authData),
+        headers: Object.assign({}, this._headers),
         body: JSON.stringify({
           avatar: avatarLink
-        })
+        }),
+        credentials: 'include'
       });
     };
   }
 
-  addNewCard(cardDataValue, authData) {
+  addNewCard(cardDataValue) {
     return this._request(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: Object.assign({}, this._headers, authData),
-      body: JSON.stringify(cardDataValue)
+      headers: Object.assign({}, this._headers),
+      body: JSON.stringify(cardDataValue),
+      credentials: 'include'
     });
   }
 
-  deleteCard(cardId, authData) {
+  deleteCard(cardId) {
     return this._request(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: Object.assign({}, this._headers, authData),
+      headers: Object.assign({}, this._headers),
+      credentials: 'include'
     });
   }
 
-  changeLikeCardStatus(cardId, isLiked, authData) {
+  changeLikeCardStatus(cardId, isLiked) {
     if (isLiked) {
       return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
-        headers: Object.assign({}, this._headers, authData)
+        headers: Object.assign({}, this._headers),
+        credentials: 'include'
       });
     } else {
       return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
-        headers: Object.assign({}, this._headers, authData)
+        headers: Object.assign({}, this._headers),
+        credentials: 'include'
       });
     };
   }

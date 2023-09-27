@@ -32,11 +32,7 @@ function App() {
   const [deleteCardId, setDeleteCardId] = useState('');
   const [loggedIn, setLoggedIn] = useState(undefined);
   const [isMobile, setIsMobile] = useState(false);
-  const [userData, setUserData] = useState({
-    email: '',
-    token: auth.getToken()
-  });
-  let authorizationHeader = { 'Authorization': `Bearer ${userData.token}` };
+  const [isAuthorized, setIsAuthorized] = useState(auth.getAuthCheck());
 
   const navigate = useNavigate();
 
@@ -71,7 +67,7 @@ function App() {
   function handleExitClick() {
     refreshPage();
     setLoggedIn(false);
-    auth.removeToken();
+    auth.removeAuthCheck();
     navigate('/sign-in', { replace: true });
   }
 
@@ -92,7 +88,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(item => item === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, !isLiked, authorizationHeader)
+    api.changeLikeCardStatus(card._id, !isLiked)
       .then(newCard => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -109,7 +105,7 @@ function App() {
     api.patchUserInfo({
       name: userDataValue.name,
       description: userDataValue.about
-    }, authorizationHeader)
+    })
       .then(resMyUserData => {
         setCurrentUser(resMyUserData);
         closeAllPopups();
@@ -123,7 +119,7 @@ function App() {
 
     api.patchUserInfo({
       avatarLink: avatarDataValue.link
-    }, authorizationHeader)
+    })
       .then(resMyUserData => {
         setCurrentUser(resMyUserData);
         closeAllPopups();
@@ -138,7 +134,7 @@ function App() {
     api.addNewCard({
       name: cardDataValue.name,
       link: cardDataValue.link
-    }, authorizationHeader)
+    })
       .then((resCard) => {
         setCards([resCard, ...cards]);
         closeAllPopups();
@@ -148,7 +144,7 @@ function App() {
   }
 
   function handleConfirmSubmit() {
-    api.deleteCard(deleteCardId, authorizationHeader)
+    api.deleteCard(deleteCardId)
       .then(() => {
         setCards(cards.filter((i) => i._id !== deleteCardId));
         closeAllPopups();
@@ -179,7 +175,7 @@ function App() {
       .then(res => {
         if ((res.statusCode !== 400) && (res.statusCode !== 401)) {
           setLoggedIn(true);
-          auth.setToken(res.token);
+          auth.setAuthCheck(true);
           navigate('/', { replace: true });
           refreshPage();
         } else {
@@ -191,23 +187,21 @@ function App() {
   }
 
   function userCheck() {
-    if (userData.token) {
+    if (isAuthorized) {
       Promise.all([
-        auth.identification(authorizationHeader),
-        api.getInitialCards(authorizationHeader)
+        auth.identification(),
+        api.getInitialCards()
       ])
         .then(([resInfoUser, resCardsData]) => {
           if ((resInfoUser.statusCode !== 400) && (resInfoUser.statusCode !== 401)) {
             setCurrentUser({
+              email: resInfoUser.email,
               name: resInfoUser.name,
               about: resInfoUser.about,
               avatar: resInfoUser.avatar,
               _id: resInfoUser._id
             });
-            setUserData({
-              email: resInfoUser.email,
-              token: auth.getToken()
-            });
+            setIsAuthorized(auth.getAuthCheck());
             setCards(resCardsData.reverse());
             setLoggedIn(true);
             navigate('/', { replace: true });
@@ -268,7 +262,7 @@ function App() {
             btnText="Выйти"
             onClick={handleExitClick}
             isMobile={isMobile}
-            emailText={userData.email} />
+            emailText={currentUser.email} />
           <ProtectedRouteElement element={Main}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
