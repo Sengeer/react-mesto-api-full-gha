@@ -17,7 +17,7 @@ class Auth {
   }
 
   setAuthCheck(isAuth) {
-    localStorage.setItem('token', isAuth);
+    localStorage.setItem('authorized', isAuth);
   }
 
   _request(url, options) {
