@@ -9,7 +9,7 @@ module.exports.getAllCards = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.createCard = (req, res) => {
+module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((card) => res.status(201).send(card))
@@ -17,7 +17,8 @@ module.exports.createCard = (req, res) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError('Переданы некорректные данные');
       }
-    });
+    })
+    .catch(next);
 };
 
 module.exports.removeCardById = (req, res, next) => {
@@ -36,7 +37,8 @@ module.exports.removeCardById = (req, res, next) => {
         throw new BadRequestError('Переданы некорректные данные');
       }
       next(err);
-    });
+    })
+    .catch(next);
 };
 
 module.exports.likeCard = (req, res, next) => {
@@ -56,7 +58,8 @@ module.exports.likeCard = (req, res, next) => {
         throw new BadRequestError('Переданы некорректные данные');
       }
       next(err);
-    });
+    })
+    .catch(next);
 };
 
 module.exports.dislikeCard = (req, res, next) => {
@@ -76,5 +79,6 @@ module.exports.dislikeCard = (req, res, next) => {
         throw new BadRequestError('Переданы некорректные данные');
       }
       next(err);
-    });
+    })
+    .catch(next);
 };

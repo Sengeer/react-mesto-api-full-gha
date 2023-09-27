@@ -24,7 +24,7 @@ const handleUserDataUpdate = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new BadRequestError('Переданы некорректные данные');
+        next(new BadRequestError('Переданы некорректные данные'));
       }
       next(err);
     });
@@ -49,7 +49,8 @@ module.exports.getMyUserData = (req, res, next) => {
         throw new BadRequestError('Переданы некорректные данные');
       }
       next(err);
-    });
+    })
+    .catch(next);
 };
 
 module.exports.createUser = (req, res, next) => {
@@ -84,7 +85,8 @@ module.exports.createUser = (req, res, next) => {
         throw new ConflictError('Пользователь с таким e-mail уже существует');
       }
       next(err);
-    });
+    })
+    .catch(next);
 };
 
 module.exports.updateUser = (req, res) => {
@@ -122,7 +124,8 @@ module.exports.login = (req, res, next) => {
           httpOnly: true,
         })
         .send({ token });
-    });
+    })
+    .catch(next);
 };
 
 module.exports.getUserById = (req, res, next) => {
@@ -139,4 +142,5 @@ module.exports.getUserById = (req, res, next) => {
       }
       next(err);
     })
+    .catch(next);
 };
