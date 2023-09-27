@@ -12,6 +12,7 @@ const {
   errorLogger,
 } = require('./middlewares/logger');
 require('dotenv').config();
+const NotFoundError = require('./errors/not-found-err');
 
 const {
   PORT = 3000,
@@ -62,7 +63,7 @@ app.use(errorLogger);
 app.use(errors());
 
 app.all('*', (req, res, next) => {
-  next(res.status(500));
+  next(new NotFoundError('Некорректный путь'));
 });
 
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
