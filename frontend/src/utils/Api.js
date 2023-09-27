@@ -1,3 +1,5 @@
+import { MODE, BASE_URL } from '../appConfig';
+
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -86,7 +88,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://api.mesto.sengeer.nomoredomainsrocks.ru',
+  baseUrl: MODE === 'production' ? BASE_URL : 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json'
   }

@@ -242,9 +242,9 @@ function App() {
     userCheck();
   }, [])
 
-    if ((currentUser.name === '') && ((loggedIn === undefined) || loggedIn)) {
-      return
-    }
+    // if ((currentUser.name === '') && ((loggedIn === undefined) || loggedIn)) {
+    //   return
+    // }
 
   return (
     <Routes>

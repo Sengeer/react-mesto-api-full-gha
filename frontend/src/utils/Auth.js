@@ -1,3 +1,5 @@
+import { MODE, BASE_URL } from '../appConfig';
+
 class Auth {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -59,7 +61,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'https://api.mesto.sengeer.nomoredomainsrocks.ru',
+  baseUrl: MODE === 'production' ? BASE_URL : 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json'
   }
