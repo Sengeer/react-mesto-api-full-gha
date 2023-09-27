@@ -57,7 +57,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.mesto.sengeer.nomoredomainsrocks.ru',
   headers: {
     'Content-Type': 'application/json'
   }
