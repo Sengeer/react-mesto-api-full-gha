@@ -14,7 +14,7 @@ const {
 require('dotenv').config();
 
 const {
-  PORT = 3000,
+  PORT = 3001,
   URL = 'mongodb://127.0.0.1:27017/mestodb',
 } = process.env;
 const app = express();
@@ -61,6 +61,10 @@ app.use(errorLogger);
 
 app.use(errors());
 
+app.all('*', (req, res, next) => {
+  next(res.status(500));
+});
+
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const { statusCode = 500, message } = err;
   res
@@ -70,10 +74,6 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
         ? 'На сервере произошла ошибка'
         : message,
     });
-});
-
-app.all('*', (req, res) => {
-  res.status(404).send({ message: 'Некорректный путь' });
 });
 
 app.listen(PORT);
