@@ -22,13 +22,14 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.removeCardById = (req, res, next) => {
   const { cardId } = req.params;
-  Card.findByIdAndRemove(cardId)
+  Card.findById(cardId)
     .then((card) => {
       if (card === null) {
         throw new NotFoundError('Передан несуществующий id карточки');
       } else if (String(card.owner) !== String(req.user._id)) {
         throw new ForbiddenError('Попытка удалить чужую карточку');
       }
+      card.deleteOne();
       res.send({ data: card });
     })
     .catch((err) => {

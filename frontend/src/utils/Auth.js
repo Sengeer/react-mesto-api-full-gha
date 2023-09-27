@@ -17,7 +17,7 @@ class Auth {
   }
 
   setAuthCheck(isAuth) {
-    localStorage.setItem('authorized', isAuth);
+    localStorage.setItem('token', isAuth);
   }
 
   _request(url, options) {
@@ -59,7 +59,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'https://api.mesto.sengeer.nomoredomainsrocks.ru',
+  baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json'
   }
