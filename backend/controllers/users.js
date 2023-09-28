@@ -37,17 +37,6 @@ module.exports.getAllUsers = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getMyUserData = (req, res, next) => {
-  User.findById(req.user._id)
-    .then((user) => {
-      if (user === null) {
-        throw new NotFoundError('Пользователь по указанному id не найден');
-      }
-      res.send(user);
-    })
-    .catch(next);
-};
-
 module.exports.createUser = (req, res, next) => {
   const {
     name,
@@ -123,8 +112,8 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getUserById = (req, res, next) => {
-  User.findById(req.params.id)
+function findUserById(req, res, next) {
+  User.findById(req.params.id || req.user._id)
     .then((user) => {
       if (user === null) {
         throw new NotFoundError('Пользователь по указанному id не найден');
@@ -137,4 +126,7 @@ module.exports.getUserById = (req, res, next) => {
       }
       next(err);
     });
-};
+}
+
+module.exports.getUserById = findUserById;
+module.exports.getMyUserData = findUserById;
