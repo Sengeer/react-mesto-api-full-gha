@@ -1,4 +1,5 @@
-import { MODE, BASE_URL } from '../appConfig';
+const MODE = process.env.REACT_APP_MODE;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 class Api {
   constructor(options) {
