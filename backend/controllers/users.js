@@ -18,7 +18,7 @@ const handleUserDataUpdate = (req, res, next) => {
     { new: true, runValidators: true },
   )
     .then((user) => {
-      if (user === null) {
+      if (!user) {
         throw new NotFoundError('Пользователь по указанному id не найден');
       }
       res.send(user);
@@ -115,7 +115,7 @@ module.exports.login = (req, res, next) => {
 function findUserById(req, res, next) {
   User.findById(req.params.id || req.user._id)
     .then((user) => {
-      if (user === null) {
+      if (!user) {
         throw new NotFoundError('Пользователь по указанному id не найден');
       }
       res.send(user);
