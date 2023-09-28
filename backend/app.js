@@ -14,9 +14,10 @@ const {
 } = require('./middlewares/logger');
 require('dotenv').config();
 const NotFoundError = require('./errors/not-found-err');
+const errorer = require('./middlewares/errorer');
 
 const {
-  PORT = 3000,
+  PORT = 3001,
   URL = 'mongodb://127.0.0.1:27017/mestodb',
 } = process.env;
 const app = express();
@@ -76,15 +77,6 @@ app.all('*', (req, res, next) => {
   next(new NotFoundError('Некорректный путь'));
 });
 
-app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-  const { statusCode = 500, message } = err;
-  res
-    .status(statusCode)
-    .send({
-      message: statusCode === 500
-        ? 'На сервере произошла ошибка'
-        : message,
-    });
-});
+app.use(errorer);
 
 app.listen(PORT);
