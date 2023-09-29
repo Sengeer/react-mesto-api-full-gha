@@ -20,8 +20,9 @@ const handleUserDataUpdate = (req, res, next) => {
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь по указанному id не найден');
+      } else {
+        res.send(user);
       }
-      res.send(user);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
@@ -119,8 +120,9 @@ function findUserById(req, res, next) {
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь по указанному id не найден');
+      } else {
+        res.send(user);
       }
-      res.send(user);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
