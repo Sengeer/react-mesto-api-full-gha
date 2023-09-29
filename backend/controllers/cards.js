@@ -18,6 +18,7 @@ module.exports.createCard = (req, res, next) => {
       if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequestError('Переданы некорректные данные'));
       }
+      next(err);
     });
 };
 
