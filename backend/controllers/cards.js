@@ -31,10 +31,11 @@ module.exports.removeCardById = (req, res, next) => {
       } else if (String(card.owner) !== String(req.user._id)) {
         throw new ForbiddenError('Попытка удалить чужую карточку');
       }
-      return card.deleteOne()
+      card.deleteOne()
         .then((deletedСard) => {
           res.send({ data: deletedСard });
-        });
+        })
+        .catch(next);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
