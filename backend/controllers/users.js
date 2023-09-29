@@ -26,8 +26,9 @@ const handleUserDataUpdate = (req, res, next) => {
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequestError('Переданы некорректные данные'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -67,8 +68,9 @@ module.exports.createUser = (req, res, next) => {
         next(new BadRequestError('Переданы некорректные данные'));
       } else if (err.code === 11000) {
         next(new ConflictError('Пользователь с таким e-mail уже существует'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -123,8 +125,9 @@ function findUserById(req, res, next) {
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
         next(new BadRequestError('Переданы некорректные данные'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 }
 
