@@ -31,12 +31,12 @@ router.use(auth);
 router.use('/cards', require('./cards'));
 router.use('/users', require('./users'));
 
-router.use(errorLogger);
-
-router.use(errors());
-
 router.all('*', (req, res, next) => {
   next(new NotFoundError('Некорректный путь'));
 });
+
+router.use(errorLogger);
+
+router.use(errors());
 
 module.exports = router;
