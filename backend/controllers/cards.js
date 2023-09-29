@@ -33,9 +33,7 @@ module.exports.removeCardById = (req, res, next) => {
         throw new ForbiddenError('Попытка удалить чужую карточку');
       }
       return card.deleteOne()
-        .then((deletedСard) => {
-          res.send({ data: deletedСard });
-        })
+        .then((deletedСard) => res.send({ data: deletedСard }))
         .catch(next);
     })
     .catch((err) => {
