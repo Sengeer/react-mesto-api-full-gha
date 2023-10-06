@@ -16,3 +16,7 @@ node_modules
 
 # Env file
 .env
+
+#Docker file
+Dockerfile
+.dockerignore

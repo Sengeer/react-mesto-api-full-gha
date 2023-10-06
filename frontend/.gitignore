@@ -24,3 +24,7 @@ yarn-error.log*
 
 # ENV files
 .env
+
+#Docker file
+Dockerfile
+.dockerignore

@@ -8,7 +8,9 @@ const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
 require('dotenv').config();
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const {
+  JWT_SECRET = 'uXDm8ygPYPzEJ3qbycmZ',
+} = process.env;
 
 const handleUserDataUpdate = (req, res, next) => {
   const { name, about, avatar } = req.body;
@@ -101,7 +103,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'uXDm8ygPYPzEJ3qbycmZ',
+        JWT_SECRET,
         { expiresIn: '7d' },
       );
       res
