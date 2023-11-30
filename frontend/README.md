@@ -1,2 +1,2 @@
-<h1>Front-end часть приложения</h1>
+<h1 align="center">Front-end часть приложения</h1>
 
