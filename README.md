@@ -1,14 +1,13 @@
-[![Статус тестов](../../actions/workflows/tests.yml/badge.svg)](../../actions/workflows/tests.yml)
 <h1 align="center">Место</h1>
 
 SPA приложение на библиотекe React, включающее фронтенд и бэкенд части приложения. Бэкенд расположен в директории `backend/`, а фронтенд - в `frontend/`. 
 
-![2023-11-30_13-35-56](https://github.com/Sengeer/react-mesto-api-full-gha/assets/63221404/9af5cbb4-ccd7-40f4-8eea-e7d3a5a0dd9d)
+![Место](https://github.com/Sengeer/react-mesto-api-full-gha/assets/63221404/9af5cbb4-ccd7-40f4-8eea-e7d3a5a0dd9d)
 
 ## Функции проекта
 
 - Авторизация и регистрация пользователей
-<img width="898" alt="123" src="https://github.com/Sengeer/react-mesto-api-full-gha/assets/63221404/7aeddb77-bd75-4cdb-859d-f37bbc05abd2">
+![Место. Авторизация и регистрация](https://github.com/Sengeer/react-mesto-api-full-gha/assets/63221404/7aeddb77-bd75-4cdb-859d-f37bbc05abd2)
 
 - Операции с карточками и пользователями;
 - Открытие изображений в всплывающем окне;
