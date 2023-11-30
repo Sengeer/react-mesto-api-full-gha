@@ -7,7 +7,7 @@ SPA приложение на библиотекe React, включающее ф
 ## Функции проекта
 
 - Авторизация и регистрация пользователей
-![Место. Авторизация и регистрация](https://github.com/Sengeer/react-mesto-api-full-gha/assets/63221404/7aeddb77-bd75-4cdb-859d-f37bbc05abd2)
+<img width="898" alt="Место. Авторизация и регистрация" src="https://github.com/Sengeer/react-mesto-api-full-gha/assets/63221404/7aeddb77-bd75-4cdb-859d-f37bbc05abd2">
 
 - Операции с карточками и пользователями;
 - Открытие изображений в всплывающем окне;
