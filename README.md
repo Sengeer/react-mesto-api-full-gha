@@ -1,5 +1,4 @@
 [![Статус тестов](../../actions/workflows/tests.yml/badge.svg)](../../actions/workflows/tests.yml)
-
 <h1 align="center">Место</h1>
 
 SPA приложение на библиотекe React, включающее фронтенд и бэкенд части приложения. Бэкенд расположен в директории `backend/`, а фронтенд - в `frontend/`. 
