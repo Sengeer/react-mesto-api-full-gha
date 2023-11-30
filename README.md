@@ -24,6 +24,7 @@ SPA приложение на библиотекe React, включающее ф
 ## Технологический стек
 
 **Front-end:** HTML, CSS, JS, React, Webpack
+
 **Back-end:** Node.js, Express, API, Webpack
 
 
