@@ -22,7 +22,7 @@ SPA приложение на библиотекe React, включающее ф
 ## Инструкция по развёртыванию
 
 1. Сохраните проект на компьютер
-<img src="https://github.com/Sengeer/movies-explorer-frontend/assets/63221404/837151e3-e555-4ba3-b84b-fab52244dad5" alt="Сохранить на компьютер" width="400" />
+<img src="https://github.com/Sengeer/react-mesto-api-full-gha/assets/63221404/095944c8-a36e-4745-8530-3ef68b1b9a23" alt="Сохранить на компьютер" width="82" />
 
 2. Установите зависимости в директориях `/backend` и `/frontend` командой `npm i`
 3. Запустите поочерёдно, сначала `/backend`, потом `/frontend` командой `npm run start`
