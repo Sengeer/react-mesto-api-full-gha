@@ -22,6 +22,7 @@ SPA приложение на библиотекe React, включающее ф
 ## Инструкция по развёртыванию
 
 1. Сохраните проект на компьютер
+
 &nbsp;&nbsp;<img src="https://github.com/Sengeer/react-mesto-api-full-gha/assets/63221404/095944c8-a36e-4745-8530-3ef68b1b9a23" alt="Сохранить на компьютер" width="106" />
 
 
