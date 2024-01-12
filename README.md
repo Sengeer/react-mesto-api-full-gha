@@ -32,9 +32,9 @@ git clone https://github.com/Sengeer/react-mesto-api-full-gha.git
 
 ## Технологический стек
 
-**Front-end:** HTML, CSS, JS, React, Webpack
+**Front-end:** HTML, CSS, JavaScript, React.js
 
-**Back-end:** Node.js, Express, API, Webpack
+**Back-end:** Node.js, Express, Webpack
 
 
 
