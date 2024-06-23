@@ -89,7 +89,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: MODE === 'production' ? BASE_URL : 'http://localhost:3000',
+  baseUrl: MODE === 'production' ? BASE_URL : 'http://localhost:30001',
   headers: {
     'Content-Type': 'application/json'
   }

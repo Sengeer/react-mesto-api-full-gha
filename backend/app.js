@@ -18,7 +18,7 @@ mongoose.connect(URL, {
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'http://localhost:3001',
+    'http://localhost:30000',
     'http://mesto.sengeer.nomoredomainsrocks.ru',
     'https://mesto.sengeer.nomoredomainsrocks.ru',
   ],
